@@ -8,11 +8,11 @@
     "test": "jest",
     "dev": "ts-node-dev src/server.ts",
     "deb:migratiionsample": "prisma migrate dev --name add-last-login-to-user",
-    "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
     "migrate:reset": "prisma migrate reset",
     "generate": "prisma generate",
-    "migrate:status": "prisma migrate status"
+    "migrate:status": "prisma migrate status",
+    "migrate:dev": "prisma migrate dev && ts-node prisma/seed.ts"
   },
   "author": "Shubham Dixit",
   "license": "MIT",
