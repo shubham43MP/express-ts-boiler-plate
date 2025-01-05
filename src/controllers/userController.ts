@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import {
   getUserById,
   getUsersByEmailDomain,
@@ -6,17 +6,18 @@ import {
   getUserCount,
 } from "../services/userService";
 import logger from "../utils/logger";
+import CustomException from "../utils/customException";
 
-export const getUser = async (req: Request, res: Response) => {
+export const getUser = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   try {
     logger.info("Fetching user by id");
     const user = await getUserById(Number(id));
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user) throw new CustomException({ error: "User not found", code: 404 });;
     res.json(user);
   } catch (error) {
     logger.error("Error fetching user by id: " + error);
-    res.status(500).json({ message: "Error fetching user" });
+    next()
   }
 };
 
