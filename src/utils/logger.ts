@@ -1,18 +1,25 @@
-import pino from "pino";
-import pretty from "pino-pretty";
+import { createLogger, format, transports } from "winston";
 
-const stream = pretty({
-  levelFirst: true,
-  colorize: true,
-  ignore: "time,hostname,pid",
+const { combine, timestamp, printf, colorize } = format;
+
+// Define custom log format
+const logFormat = printf(({ level, message, timestamp }) => {
+  return `${timestamp} [${level}]: ${message}`;
 });
 
-const logger = pino(
-  {
-    name: "MyLogger",
-    level: process.env.NODE_ENV === "development" ? "debug" : "info",
-  },
-  stream
-);
+// Create the Winston logger
+const logger = createLogger({
+  level: "info",
+  format: combine(
+    timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    colorize(),
+    logFormat
+  ),
+  transports: [
+    new transports.Console(), // Log to console
+    new transports.File({ filename: "logs/error.log", level: "error" }), // Error logs
+    new transports.File({ filename: "logs/combined.log" }), // All logs
+  ],
+});
 
 export default logger;
