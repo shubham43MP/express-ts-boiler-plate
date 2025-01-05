@@ -4,6 +4,7 @@ import {
   getUsersByEmailDomain,
   getPaginatedUsers,
   getUserCount,
+  getUsers
 } from "../services/userService";
 import logger from "../utils/logger";
 import CustomException from "../utils/customException";
@@ -20,6 +21,18 @@ export const getUser = async (req: Request, res: Response, next: NextFunction) =
     next()
   }
 };
+
+export const getManyUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      logger.info("Fetching users");
+      const users = await getUsers();
+      logger.info("Users fetched, responding", users)
+      res.json(users);
+    } catch (error) {
+      logger.error("Error fetching user by id: " + error);
+      next()
+    }
+  };
 
 export const getUsersByDomain = async (req: Request, res: Response) => {
   const { domain } = req.params;
