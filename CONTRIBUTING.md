@@ -11,7 +11,7 @@ Click the **Fork** button in the top-right corner of this repository to create y
 ### 2. Clone the Repo 🖥️
 Use the command below to clone the forked repository to your local machine:
 ```bash
-git clone https://github.com/your-username/express-ts-prisma-boilerplate.git
+git clone https://github.com/shubham43MP/express-ts-boiler-plate.git
 ```
 
 ### 3. Set Up the Project 🚧

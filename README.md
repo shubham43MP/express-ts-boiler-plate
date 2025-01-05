@@ -35,7 +35,7 @@ This is your ultimate kickstart to building scalable, modern, and maintainable R
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/express-ts-prisma-boilerplate.git
+git clone https://github.com/shubham43MP/express-ts-boiler-plate.git
 cd express-ts-prisma-boilerplate
 ```
 
