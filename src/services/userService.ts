@@ -4,6 +4,10 @@ export const getUserById = async (id: number) => {
   return prisma.user.findUnique({ where: { id } });
 };
 
+export const getUsers = async () => {
+  return prisma.user.findMany();
+};
+
 export const getUsersByEmailDomain = async (domain: string) => {
   return prisma.user.findMany({
     where: { email: { endsWith: `@${domain}` } },
