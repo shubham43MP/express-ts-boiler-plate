@@ -14,5 +14,6 @@ router.get("/", getManyUsers);
 router.get("/domain/:domain", getUsersByDomain);
 router.get("/paginated", getUsersPaginated);
 router.get("/count", getTotalUsers);
+// router.post("/", validate(createUserSchema), addUser); // add like this
 
 export default router;
