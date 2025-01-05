@@ -5,14 +5,17 @@ import {
   getPaginatedUsers,
   getUserCount,
 } from "../services/userService";
+import logger from "../utils/logger";
 
 export const getUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
+    logger.info("Fetching user by id");
     const user = await getUserById(Number(id));
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
   } catch (error) {
+    logger.error("Error fetching user by id: " + error);
     res.status(500).json({ message: "Error fetching user" });
   }
 };
